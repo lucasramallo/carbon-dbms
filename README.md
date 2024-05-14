@@ -1,3 +1,6 @@
+
+<img width="100" alt="carbon logo" src="https://github.com/lucasramallo/carbon-dbms/assets/108425719/c6762756-c710-4c66-99bb-7744f7acf4ab">
+
 <img width="1251" alt="Splash Screen" src="https://github.com/lucasramallo/carbon-dbms/assets/108425719/fbb033a4-3603-4e03-bfc0-8210b23543cb">
 
 ## 
