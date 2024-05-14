@@ -12,7 +12,7 @@ public class Main {
 
         table.addTuple(tuple);
 
-        System.out.println(table.getTuples().get(0).getType().getValue());
+        System.out.println(table.getTuples().get(0).getValue());
         System.out.println(tuple.getType().getValue());
     }
 }

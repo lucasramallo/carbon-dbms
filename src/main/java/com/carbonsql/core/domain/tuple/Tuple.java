@@ -15,4 +15,8 @@ public class Tuple {
         this.name = name;
         this.type = type;
     }
+
+    public Object getValue() {
+        return type.getValue();
+    }
 }
