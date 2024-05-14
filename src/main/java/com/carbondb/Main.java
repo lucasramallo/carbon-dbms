@@ -1,8 +1,8 @@
-package com.carbonsql;
+package com.carbondb;
 
-import com.carbonsql.core.domain.table.Table;
-import com.carbonsql.core.domain.tuple.Tuple;
-import com.carbonsql.core.types.VarcharType;
+import com.carbondb.storage.engine.domain.table.Table;
+import com.carbondb.storage.engine.domain.tuple.Tuple;
+import com.carbondb.storage.engine.domain.types.VarcharType;
 
 
 public class Main {
@@ -12,7 +12,7 @@ public class Main {
 
         table.addTuple(tuple);
 
-        System.out.println(table.getTuples().get(0).getValue());
+        System.out.println(table.toString());
         System.out.println(tuple.getType().getValue());
     }
 }

@@ -1,6 +1,6 @@
-package com.carbonsql.core.domain.tuple;
+package com.carbondb.storage.engine.domain.tuple;
 
-import com.carbonsql.core.types.Type;
+import com.carbondb.storage.engine.domain.types.Type;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +18,13 @@ public class Tuple {
 
     public Object getValue() {
         return type.getValue();
+    }
+
+    @Override
+    public String toString() {
+        return "Tuple{" +
+                "name = '" + name + '\'' +
+                ", type = " + type +
+                '}';
     }
 }
