@@ -5,20 +5,24 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.*;
-import java.util.random.RandomGeneratorFactory;
 
 @Getter
 @Setter
 public class Table {
     private HashMap<UUID, Tuple> tuples;
+    private Tuple primaryKey;
 
     public Table() {
         this.tuples = new HashMap<>();
     }
 
     public void addTuple(Tuple tuple) {
-        tuples.put(UUID.randomUUID(), tuple);
-        System.out.println();
+        UUID tupleId = UUID.randomUUID();
+        tuples.put(tupleId, tuple);
+
+        if(tuple.getIsPK()) {
+            this.primaryKey = tuples.get(tupleId);
+        }
     }
 
     @Override

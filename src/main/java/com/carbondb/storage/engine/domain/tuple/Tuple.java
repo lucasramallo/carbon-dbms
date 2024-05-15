@@ -11,13 +11,20 @@ public class Tuple {
 
     private Type type;
 
+    private Boolean isPK;
+
     public Tuple(String name, Type type) {
         this.name = name;
         this.type = type;
+        this.isPK = false;
     }
 
     public Object getValue() {
         return type.getValue();
+    }
+
+    public void primaryKey() {
+        setIsPK(true);
     }
 
     @Override
