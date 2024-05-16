@@ -3,7 +3,7 @@ package com.carbondb.storage.engine.domain.types;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class VarcharType implements Type {
+public class VarcharType implements Type<String> {
     private String value;
 
     public VarcharType(String value) {
@@ -15,8 +15,7 @@ public class VarcharType implements Type {
     }
 
     @Override
-    public String getValue()
-    {
+    public String getValue() {
         return value;
     }
 }

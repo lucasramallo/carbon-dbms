@@ -1,24 +1,32 @@
 package com.carbondb;
 
 import com.carbondb.storage.engine.domain.table.Table;
-import com.carbondb.storage.engine.domain.tuple.Tuple;
+import com.carbondb.storage.engine.domain.column.Column;
 import com.carbondb.storage.engine.domain.types.VarcharType;
+import com.carbondb.storage.engine.domain.util.PrintTable;
 
 
 public class Main {
     public static void main(String[] args) {
-        Table table = new Table();
-        Tuple tuple = new Tuple("name", new VarcharType("Lucas"));
-        Tuple tuple2 = new Tuple("id", new VarcharType("75847367384"));
+        Table table = new Table("Users");
+        Column<VarcharType> column = new Column("name", new VarcharType());
+        Column<VarcharType> column2 = new Column("id", new VarcharType());
 
-        tuple2.primaryKey();
+        column2.primaryKey();
 
-        table.addTuple(tuple);
-        table.addTuple(tuple2);
+        table.addTuple(column);
+        table.addTuple(column2);
+        column.addValue(new VarcharType("Lucas"));
+        column.addValue(new VarcharType("Maria"));
 
         System.out.println(table.getPrimaryKey());
 
-        System.out.println(table.toString());
-        System.out.println(tuple.getType().getValue());
+        System.out.println(table);
+
+        PrintTable printTable = new PrintTable(table.getName());
+        printTable.addColumn(table.getTuples());
+        printTable.addRow(table.getTuples());
+
+        System.out.println(printTable);
     }
 }
