@@ -4,47 +4,36 @@ import com.carbondb.storage.engine.domain.types.Type;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-
 @Getter
 @Setter
-public class Column<T>{
+public class Field<T>{
     private String name;
 
     private Type<T> type;
 
     private Boolean isPK;
 
-    private HashMap<UUID, Type<T>> values;
+    private Boolean notNull;
 
-    public Column(String name, Type<T> type) {
+
+    public Field(String name, Type<T> type) {
         this.name = name;
         this.type = type;
         this.isPK = false;
-        this.values = new HashMap<>();
+        this.notNull = false;
     }
 
     public Object getValue() {
         return type.getValue();
     }
 
-    public List getValuesList() {
-        List valuesArray = new ArrayList<>();
-
-        values.forEach((id, type) -> valuesArray.add(type.getValue()));
-
-        return valuesArray;
-    }
 
     public void primaryKey() {
         setIsPK(true);
     }
 
-    public void addValue(Type type) {
-        values.put(UUID.randomUUID(), type);
+    public boolean cannotBeNullable() {
+        return this.notNull;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.carbondb.storage.engine.domain.util;
 
-import com.carbondb.storage.engine.domain.column.Column;
+import com.carbondb.storage.engine.domain.column.Field;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,17 +18,17 @@ public class PrintTable {
         this.rows = new ArrayList<>();
     }
 
-    public void addColumn(HashMap<UUID, Column> hashMapcolumns) {
-        hashMapcolumns.forEach((id, column) -> columns.add(column.getName()));
+    public void addColumn(HashMap<UUID, Field> hashMapcolumns) {
+        hashMapcolumns.forEach((id, field) -> columns.add(field.getName()));
     }
 
-    public void addRow(HashMap<UUID, Column> hashMapcolumns) {
-        List values = new ArrayList<>();
-
-        hashMapcolumns.forEach((id, column) -> rows.add(
-                column.getValuesList()
-        ));
-    }
+//    public void addRow(HashMap<UUID, Column> hashMapcolumns) {
+//        List values = new ArrayList<>();
+//
+//        hashMapcolumns.forEach((id, column) -> rows.add(
+//                column.getValuesList()
+//        ));
+//    }
 
     @Override
     public String toString() {

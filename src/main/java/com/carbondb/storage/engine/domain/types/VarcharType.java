@@ -1,8 +1,12 @@
 package com.carbondb.storage.engine.domain.types;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
+@Setter
+@Getter
 public class VarcharType implements Type<String> {
     private String value;
 
@@ -17,5 +21,21 @@ public class VarcharType implements Type<String> {
     @Override
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public VarcharType createNewKeyFieldType() {
+        return new VarcharType();
+    }
+
+    @Override
+    public String toString() {
+        return "VarcharType{" +
+                "value='" + value + '\'' +
+                '}';
     }
 }

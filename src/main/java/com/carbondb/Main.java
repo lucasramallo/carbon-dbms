@@ -1,32 +1,32 @@
 package com.carbondb;
 
 import com.carbondb.storage.engine.domain.table.Table;
-import com.carbondb.storage.engine.domain.column.Column;
+import com.carbondb.storage.engine.domain.column.Field;
 import com.carbondb.storage.engine.domain.types.VarcharType;
-import com.carbondb.storage.engine.domain.util.PrintTable;
+
+import java.util.HashMap;
 
 
 public class Main {
     public static void main(String[] args) {
         Table table = new Table("Users");
-        Column<VarcharType> column = new Column("name", new VarcharType());
-        Column<VarcharType> column2 = new Column("id", new VarcharType());
+        Field<VarcharType> field = new Field("id", new VarcharType());
+        Field<VarcharType> field2 = new Field("name", new VarcharType());
+        Field<VarcharType> field3 = new Field("age", new VarcharType());
+        field.primaryKey();
+        field2.setNotNull(true);
 
-        column2.primaryKey();
+        table.addColumn(field);
+        table.addColumn(field2);
+        table.addColumn(field3);
 
-        table.addTuple(column);
-        table.addTuple(column2);
-        column.addValue(new VarcharType("Lucas"));
-        column.addValue(new VarcharType("Maria"));
+        HashMap<String, String> data = new HashMap<>();
 
-        System.out.println(table.getPrimaryKey());
+        data.put("id", "61h3-2hd3-ej34-37ej");
+        data.put("age", "19");
 
-        System.out.println(table);
+        table.addRecord(data);
 
-        PrintTable printTable = new PrintTable(table.getName());
-        printTable.addColumn(table.getTuples());
-        printTable.addRow(table.getTuples());
-
-        System.out.println(printTable);
+        System.out.println(table.getRecords());
     }
 }
