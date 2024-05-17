@@ -9,3 +9,15 @@
 ## CarbonDB
 
 CarbonDB é uma simulação de um Sistema de Gerenciamento de Banco de Dados (SGBD) em memória, implementado em Java. O objetivo é criar uma estrutura de dados em memória capaz de armazenar e manipular dados, proporcionando um ambiente simulado para testes e experimentação de conceitos de banco de dados.
+
+<br/>
+
+![Capturar](https://github.com/lucasramallo/carbon-dbms/assets/108425719/80d20454-422f-4917-9da4-74f73562ffef)
+
+### Implementações
+
+O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+
+- [ ] Storage Engine (Em desenvolvimento)
+- [ ] SQL Query parser and executor
+- [ ] Write data
