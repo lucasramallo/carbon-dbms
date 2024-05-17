@@ -15,7 +15,6 @@ public class Field<T>{
 
     private Boolean notNull;
 
-
     public Field(String name, Type<T> type) {
         this.name = name;
         this.type = type;
@@ -27,6 +26,9 @@ public class Field<T>{
         return type.getValue();
     }
 
+    public String getTypeName() {
+        return type.getName();
+    }
 
     public void primaryKey() {
         setIsPK(true);

@@ -9,26 +9,40 @@ import java.util.UUID;
 
 public class PrintTable {
     private String tableName;
-    private List<String> columns;
+    private List<List<Object>> columns; // Modificação aqui
     private List<List<Object>> rows;
 
     public PrintTable(String tableName) {
         this.tableName = tableName;
-        this.columns = new ArrayList<>();
+        this.columns = new ArrayList<>(); // Modificação aqui
         this.rows = new ArrayList<>();
     }
 
-    public void addColumn(HashMap<UUID, Field> hashMapcolumns) {
-        hashMapcolumns.forEach((id, field) -> columns.add(field.getName()));
+    // Método para adicionar coluna e tipo
+    public void addColumn(ArrayList<Field> fields) {
+        fields.forEach(field -> {
+            ArrayList<Object> values = new ArrayList<>();
+
+            values.add(field.getName());
+            values.add(field.getTypeName());
+            System.out.println(values);
+
+            columns.add(values);
+        });
     }
 
-//    public void addRow(HashMap<UUID, Column> hashMapcolumns) {
-//        List values = new ArrayList<>();
-//
-//        hashMapcolumns.forEach((id, column) -> rows.add(
-//                column.getValuesList()
-//        ));
-//    }
+    public void addRow(HashMap<Field, ArrayList<Field>> hashMapcolumns) {
+        hashMapcolumns.forEach((id, valuesList) -> {
+            ArrayList<Object> values = new ArrayList<>();
+            values.add(id.getValue());
+            valuesList.forEach(field -> {
+                values.add(field.getValue());
+            });
+
+            rows.add(values);
+        });
+
+    }
 
     @Override
     public String toString() {
@@ -37,23 +51,23 @@ public class PrintTable {
 
         // Header row
         sb.append("┌");
-        for (String column : columns) {
-            sb.append("────────────┬");
+        for (List<Object> column : columns) {
+            sb.append("──────────────────────────────┬");
         }
         sb.deleteCharAt(sb.length() - 1); // Remove o último caractere "|"
         sb.append("┐\n");
 
         // Columns
         sb.append("│");
-        for (String column : columns) {
-            sb.append(String.format("%12s│", column));
+        for (List<Object> column : columns) {
+            sb.append(String.format("%20s (%-5s)│", column.get(0), column.get(1)));
         }
         sb.append("\n");
 
         // Linha divisória
         sb.append("├");
-        for (String column : columns) {
-            for (int i = 0; i < 12; i++) {
+        for (List<Object> column : columns) {
+            for (int i = 0; i < 30; i++) {
                 sb.append("─");
             }
             sb.append("┼");
@@ -65,15 +79,15 @@ public class PrintTable {
         for (List<Object> row : rows) {
             sb.append("│");
             for (Object cell : row) {
-                sb.append(String.format("%12s│", cell.toString()));
+                sb.append(String.format("%30s│", cell.toString()));
             }
             sb.append("\n");
         }
 
         // Rodapé da tabela
         sb.append("└");
-        for (String column : columns) {
-            for (int i = 0; i < 12; i++) {
+        for (List<Object> column : columns) {
+            for (int i = 0; i < 30; i++) {
                 sb.append("─");
             }
             sb.append("┴");
@@ -84,3 +98,109 @@ public class PrintTable {
         return sb.toString();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//package com.carbondb.storage.engine.domain.util;
+//
+//import com.carbondb.storage.engine.domain.column.Field;
+//
+//import java.util.ArrayList;
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.UUID;
+//
+//public class PrintTable {
+//    private String tableName;
+//    private List<String> columns;
+//    private List<List<Object>> rows;
+//
+//    public PrintTable(String tableName) {
+//        this.tableName = tableName;
+//        this.columns = new ArrayList<>();
+//        this.rows = new ArrayList<>();
+//    }
+//
+//    public void addColumn(ArrayList<Field> fields) {
+//        fields.forEach(field -> columns.add(field.getName()));
+//    }
+//
+//    public void addRow(HashMap<Field, ArrayList<Field>> hashMapcolumns) {
+//        hashMapcolumns.forEach((id, valuesList) -> {
+//            ArrayList<Object> values = new ArrayList<>();
+//            values.add(id.getValue());
+//            valuesList.forEach(field -> {
+//                values.add(field.getValue());
+//            });
+//
+//            rows.add(values);
+//            System.out.println(values);
+//        });
+//
+//        System.out.println("=>" + rows);
+//    }
+//
+//    @Override
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Table: ").append(tableName).append("\n");
+//
+//        // Header row
+//        sb.append("┌");
+//        for (String column : columns) {
+//            sb.append("──────────────────────────────┬");
+//        }
+//        sb.deleteCharAt(sb.length() - 1); // Remove o último caractere "|"
+//        sb.append("┐\n");
+//
+//        // Columns
+//        sb.append("│");
+//        for (String column : columns) {
+//            sb.append(String.format("%30s│", column));
+//        }
+//        sb.append("\n");
+//
+//        // Linha divisória
+//        sb.append("├");
+//        for (String column : columns) {
+//            for (int i = 0; i < 30; i++) {
+//                sb.append("─");
+//            }
+//            sb.append("┼");
+//        }
+//        sb.deleteCharAt(sb.length() - 1); // Remove o último caractere "|"
+//        sb.append("┤\n");
+//
+//        // Dados das linhas
+//        for (List<Object> row : rows) {
+//            sb.append("│");
+//            for (Object cell : row) {
+//                sb.append(String.format("%30s│", cell.toString()));
+//            }
+//            sb.append("\n");
+//        }
+//
+//        // Rodapé da tabela
+//        sb.append("└");
+//        for (String column : columns) {
+//            for (int i = 0; i < 30; i++) {
+//                sb.append("─");
+//            }
+//            sb.append("┴");
+//        }
+//        sb.deleteCharAt(sb.length() - 1);
+//        sb.append("┘\n");
+//
+//        return sb.toString();
+//    }
+//}

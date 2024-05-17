@@ -55,7 +55,6 @@ public class Table {
         records.put((Field) PK.get(0), listOfRecordsWithoutPk);
     }
 
-    //TODO: GARANTIR QUE A PK SEMPRE FIQUE NA POSIÇÃO 0
     public void addColumn(Field field) {
         fields.add(field);
     }

@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 public class VarcharType implements Type<String> {
     private String value;
+    private final String name = "Varchar";
 
     public VarcharType(String value) {
         if(value.getBytes().length > 8000) {
