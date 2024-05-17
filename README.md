@@ -12,7 +12,7 @@ CarbonDB é uma simulação de um Sistema de Gerenciamento de Banco de Dados (SG
 
 <br/>
 
-![Capturar](https://github.com/lucasramallo/carbon-dbms/assets/108425719/80d20454-422f-4917-9da4-74f73562ffef)
+![Capturar](https://github.com/lucasramallo/carbon-dbms/assets/108425719/39c24836-ade3-435f-8ca9-d913714f0b9d)
 
 ### Implementações
 
