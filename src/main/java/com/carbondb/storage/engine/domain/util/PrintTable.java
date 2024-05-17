@@ -9,23 +9,21 @@ import java.util.UUID;
 
 public class PrintTable {
     private String tableName;
-    private List<List<Object>> columns; // Modificação aqui
+    private List<List<Object>> columns;
     private List<List<Object>> rows;
 
     public PrintTable(String tableName) {
         this.tableName = tableName;
-        this.columns = new ArrayList<>(); // Modificação aqui
+        this.columns = new ArrayList<>();
         this.rows = new ArrayList<>();
     }
 
-    // Método para adicionar coluna e tipo
     public void addColumn(ArrayList<Field> fields) {
         fields.forEach(field -> {
             ArrayList<Object> values = new ArrayList<>();
 
             values.add(field.getName());
             values.add(field.getTypeName());
-            System.out.println(values);
 
             columns.add(values);
         });

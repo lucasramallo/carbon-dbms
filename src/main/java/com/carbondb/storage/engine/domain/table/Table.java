@@ -7,6 +7,10 @@ import lombok.Setter;
 
 import java.util.*;
 
+/**
+ *  fields: these are the fields that are created as soon as the table is created.
+ *  records: these are new fields that are created to create a record from the fields already defined.
+ */
 @Getter
 @Setter
 public class Table {
@@ -16,15 +20,15 @@ public class Table {
 
     public Table(String name) {
         this.name = name;
-        this.fields = new ArrayList();
+        this.fields = new ArrayList<>();
         this.records = new HashMap<>();
     }
 
     /**
-     *  fields: these are the fields that are created as soon as the table is created.
-     *  records: these are new fields that are created to create a record from the fields already defined.
+     * @param data - Is a hashmap that have been contains:
+     *             1. String as the key with the same name as the field;
+     *             2. String with the field value to be added;
      */
-
     public void addRecord(HashMap<String, String> data) {
         ArrayList<Field> listOfRecordsWithoutPk = new ArrayList<>();
         ArrayList<Object> PK = new ArrayList<>();
@@ -33,18 +37,18 @@ public class Table {
             Type type = keyField.getType().createNewKeyFieldType(); // cria um novo tipo da keyField para o FieldValue
             String keyFieldValue = data.remove(keyField.getName()); // pega o valor recebido correspondente a key field
 
-            if(keyField.cannotBeNullable() && keyFieldValue == null) { // Exception caso o calor seja null e a key field for notNull
+            if(keyField.cannotBeNullable() && keyFieldValue == null) {
                 throw new RuntimeException("Value " + keyField.getName() + " cannot be null");
             }
 
             type.setValue(keyFieldValue);
             Field newField = new Field<>(keyField.getName(), type);
 
+            /*
+                 If the newField is the record id, it is added to the ArrayList PK
+                 to be retrieved and serve as the key of the hashmap records.
+             */
             if(newField.getName().equals("id")) {
-                /**
-                    if the newField is the record id, it is added to the ArrayList PK
-                    to be retrieved and serve as the key of the hashmap records.
-                 */
                 PK.add(newField);
                 return;
             }

@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * This classe is used to encapsulate the Varchar Type
+ */
 @NoArgsConstructor
 @Setter
 @Getter
@@ -29,6 +32,7 @@ public class VarcharType implements Type<String> {
         this.value = value;
     }
 
+    @Override
     public VarcharType createNewKeyFieldType() {
         return new VarcharType();
     }

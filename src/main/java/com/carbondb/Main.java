@@ -33,8 +33,15 @@ public class Main {
         data2.put("id", "6e45-4h53-lo94-hr63");
         data2.put("age", "18");
 
+        HashMap<String, String> data3 = new HashMap<>();
+
+        data3.put("name", "Julia");
+        data3.put("id", "gh4y-h6gf-fr67-hmhd");
+        data3.put("age", "22");
+
         table.addRecord(data);
         table.addRecord(data2);
+        table.addRecord(data3);
 
         System.out.println(table.getRecords());
 
