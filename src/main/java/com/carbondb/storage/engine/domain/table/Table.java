@@ -34,14 +34,15 @@ public class Table {
         ArrayList<Object> PK = new ArrayList<>();
 
         fields.forEach(keyField -> {
-            Type type = keyField.getType().createNewKeyFieldType(); // cria um novo tipo da keyField para o FieldValue
-            String keyFieldValue = data.remove(keyField.getName()); // pega o valor recebido correspondente a key field
+            Type type = keyField.getType().createNewKeyFieldType();
 
-            if(keyField.cannotBeNullable() && keyFieldValue == null) {
+            String value = data.remove(keyField.getName());
+
+            if(keyField.cannotBeNullable() && value == null) {
                 throw new RuntimeException("Value " + keyField.getName() + " cannot be null");
             }
 
-            type.setValue(keyFieldValue);
+            type.setValue(value);
             Field newField = new Field<>(keyField.getName(), type);
 
             /*
