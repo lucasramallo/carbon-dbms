@@ -4,13 +4,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * This classe is used to encapsulate the Varchar Type
  */
 @NoArgsConstructor
 @Setter
 @Getter
-public class VarcharType implements Type<String> {
+public class VarcharType implements Type<String>, Serializable {
     private String value;
     private final String name = "Varchar";
 

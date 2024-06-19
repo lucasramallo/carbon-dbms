@@ -1,54 +1,57 @@
 package com.carbondb.storage.engine.fileManagement.pages;
 
+import com.carbondb.storage.engine.domain.column.Field;
+
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 public class Page implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final int LIMITE_TAMANHO = 4096; // Definindo um limite de tamanho para a página (em bytes)
-    private HashMap<UUID, Cliente> registros;
+    private ArrayList<HashMap<Integer, ArrayList<Field>>> registros;
     private int tamanhoAtual;
 
     public Page() {
-        this.registros = new HashMap<>();
+        this.registros = new ArrayList<>();
         this.tamanhoAtual = 0;
     }
 
-    public boolean adicionarRegistro(UUID uuid, Cliente cliente, String path) {
-        int tamanhoRegistro = calcularTamanhoRegistro(cliente);
+    public boolean adicionarRegistro(Integer id, HashMap<Integer, ArrayList<Field>> record, String path) {
+        int tamanhoRegistro = calcularTamanhoRegistro(record);
         if (tamanhoAtual + tamanhoRegistro > LIMITE_TAMANHO) {
             return false;
         }
         read(path);
-        registros.put(uuid, cliente);
+        registros.add(record);
         tamanhoAtual += tamanhoRegistro;
         return true;
     }
 
-    public boolean adicionarRegistro(UUID uuid, Cliente cliente) {
-        int tamanhoRegistro = calcularTamanhoRegistro(cliente);
+    public boolean adicionarRegistro(Integer id, HashMap<Integer, ArrayList<Field>> record) {
+        int tamanhoRegistro = calcularTamanhoRegistro(record);
         if (tamanhoAtual + tamanhoRegistro > LIMITE_TAMANHO) {
             return false;
         }
-        registros.put(uuid, cliente);
+        registros.add(record);
         tamanhoAtual += tamanhoRegistro;
         return true;
     }
 
     public void print() {
-        registros.forEach((id, registro) -> System.out.println(registro));
+        registros.forEach(registro -> System.out.println(registro));
     }
 
-    public Cliente buscarRegistro(UUID uuid) {
-        return registros.get(uuid);
-    }
+//    public Cliente buscarRegistro(UUID uuid) {
+//        return registros.get(uuid);
+//    }
 
-    private int calcularTamanhoRegistro(Cliente cliente) {
+    private int calcularTamanhoRegistro(HashMap<Integer, ArrayList<Field>> record) {
         // Serializar o cliente e calcular o tamanho
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
              ObjectOutputStream oos = new ObjectOutputStream(baos)) {
-            oos.writeObject(cliente);
+            oos.writeObject(record);
             oos.flush();
             return baos.toByteArray().length;
         } catch (IOException e) {
@@ -71,7 +74,7 @@ public class Page implements Serializable {
                 // Assuming registros is a class member variable
                 Page page = (Page) objInput.readObject();
 
-                this.registros.putAll(page.registros);
+                this.registros.addAll(page.registros);
 
                 objInput.close();
             }

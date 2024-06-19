@@ -4,9 +4,12 @@ import com.carbondb.storage.engine.domain.types.Type;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class Field<T>{
+public class Field<T> implements Serializable {
     private String name;
 
     private Type<T> type;

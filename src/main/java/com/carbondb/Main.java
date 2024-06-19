@@ -15,6 +15,7 @@ import java.util.UUID;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 //        Table table = new Table("Users");
+
 //        Field<VarcharType> field = new Field("id", new VarcharType());
 //        Field<VarcharType> field2 = new Field("name", new VarcharType());
 //        Field<VarcharType> field3 = new Field("age", new VarcharType());
@@ -56,12 +57,28 @@ public class Main {
 //        System.out.println(printTable);
 
 
-        Cliente cliente = new Cliente(UUID.randomUUID(), "Lucas", 19);
-        Cliente cliente3 = new Cliente(UUID.randomUUID(), "Maria", 19);
-        PageManager manager = new PageManager("../data-base-management-system/src/main/java/com/carbondb/storage/engine/fileManagement/pages.");
-        manager.adicionarCliente(cliente);
-        manager.adicionarCliente(cliente3);
-        UUID id = cliente.getUuid();
+//        Cliente cliente = new Cliente(UUID.randomUUID(), "Lucas", 19);
+//        Cliente cliente3 = new Cliente(UUID.randomUUID(), "Maria", 19);
+//        PageManager manager = new PageManager("../data-base-management-system/src/main/java/com/carbondb/storage/engine/fileManagement/pages.");
+//        manager.adicionarCliente(cliente);
+//        manager.adicionarCliente(cliente3);
+//        UUID id = cliente.getUuid();
+
+
+
+        PageManager manager = new PageManager("../data-base-management-system/src/main/java/com/carbondb/storage/engine/fileManagement/pages");
+        Table table = new Table("Users", manager);
+
+        Field<VarcharType> field = new Field("name", new VarcharType());
+        Field<VarcharType> field2 = new Field("age", new VarcharType());
+        table.addColumn(field);
+        table.addColumn(field2);
+
+        HashMap<String, String> data = new HashMap<>();
+        data.put("name", "Lucas");
+        data.put("age", "19");
+
+        table.addRecord(data);
 
         manager.print();
     }
