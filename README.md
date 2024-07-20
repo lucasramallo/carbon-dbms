@@ -4,7 +4,7 @@
 
 ## 
 
-CarbonDB é uma simulação de um Sistema de Gerenciamento de Banco de Dados (SGBD), implementado em Java. O objetivo é criar uma estrutura de dados em memória capaz de armazenar e manipular dados, proporcionando um ambiente simulado para testes e experimentação de conceitos de banco de dados.
+CarbonDB é uma simulação de um Sistema de Gerenciamento de Banco de Dados (SGBD), implementado em Java. O objetivo é criar uma estrutura de dados capaz de armazenar e manipular dados, proporcionando um ambiente simulado para testes e experimentação de conceitos de banco de dados.
 
 <br/>
 
